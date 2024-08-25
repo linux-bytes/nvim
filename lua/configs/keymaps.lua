@@ -33,3 +33,7 @@ end
 
 vim.keymap.set("n", "<F4>", toggle_quickfix, {desc = "Toggle Quickfix Window"})
 
+local keymap = vim.keymap
+
+keymap.set("v", "j", ":m '>+1<CR>gv=gv")
+keymap.set("v", "k", ":m '<-2<CR>gv=gv")

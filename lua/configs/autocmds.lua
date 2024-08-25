@@ -8,6 +8,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		vim.opt_local.wrap	= false
 		vim.opt_local.spell	= true
-		vim.opt_local.ts	= 8
+		vim.opt_local.tabstop = 8
+		vim.opt_local.shiftwidth =8
+		vim.opt_local.expandtab = true
+		vim.opt_local.autoindent = true
 	end,
 })

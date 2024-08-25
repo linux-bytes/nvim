@@ -26,7 +26,7 @@ return {
 					'lua_ls',
 					'cmake',
 					'clangd',
-					'gopls',
+					--- 'gopls',
 				},
 			})
 

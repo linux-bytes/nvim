@@ -6,9 +6,19 @@ return {
 	event = 'VimEnter',
 
 	config = function()
-		require('dashboard').setup {
+		local logo = [[
+		     ██╗███████╗██████╗ ██████╗ ██╗   ██╗
+		     ██║██╔════╝██╔══██╗██╔══██╗╚██╗ ██╔╝
+		     ██║█████╗  ██████╔╝██████╔╝ ╚████╔╝ 
+		██   ██║██╔══╝  ██╔══██╗██╔══██╗  ╚██╔╝  
+		╚█████╔╝███████╗██║  ██║██║  ██║   ██║   
+		 ╚════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   
+		 ]];
+
+		require('dashboard').setup({
 			-- config
-		}
+	 		header = vim.split(logo , "\n");
+		})
 	end,
 }
 

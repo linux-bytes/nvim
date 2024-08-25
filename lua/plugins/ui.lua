@@ -1,6 +1,13 @@
 -- 显示颜色
 return {
 	{
+		'glepnir/nerdicons.nvim',
+		cmd = 'NerdIcons',
+		config = function()
+			require('nerdicons').setup({})
+		end
+	},
+	{
 		'NvChad/nvim-colorizer.lua',
 		config = function()
 			require("colorizer").setup({
