@@ -75,10 +75,10 @@ return {
 				cursorline = {
 					enable	= true,
 					timeout	= 1000,
-					number	= false,
+					number	= true,
 				},
 				cursorword = {
-					enable	   = true,
+					enable	   = false,
 					min_length = 3,
 					hl = { underline = true },
 				}

@@ -23,26 +23,55 @@ return {
 				-- 支持的语言可以在这里找：https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 				ensure_installed = {
 					'pylsp',
+					-- 'python-lsp-server',
 					'lua_ls',
 					'cmake',
 					'clangd',
 					--- 'gopls',
+				},
+				-- Enable lsp cursor word highlighting
+				document_highlight = {
+					enabled = true,
 				},
 			})
 
 			require("lspconfig").clangd.setup({
 				cmd = {
 					"clangd",
-					-- "--query-driver=/usr/lib/llvm/17/bin/clang",
+					"-j=8", -- 后台异步更新使用的worker数量
 					"--background-index",
 					"--background-index-priority=normal",
-					"-j=8", -- 后台异步更新使用的worker数量
-					"--compile-commands-dir=" .. vim.fn.getcwd(), -- 配置compile_commands.json路径
+					"--clang-tidy",
 					"--all-scopes-completion", -- 全局补全
+					-- "--compile-commands-dir=" .. vim.fn.getcwd(), -- 配置compile_commands.json路径
+					-- "--query-driver=/usr/lib/llvm/17/bin/clang",
 					-- "--header-insertion=iwyu", -- 插入建议时自动引入头文件
 					-- "--log=verbose"
 				},
 				filetypes = { "c", "h", "cpp", "objc", "objcpp" },
+			})
+
+			require("lspconfig").pylsp.setup({
+				settings = {
+					pylsp = {
+						plugins = {
+							-- formatter options
+							black = { enabled = true },
+							autopep8 = { enabled = false },
+							yapf = { enabled = false },
+							-- linter options
+							pylint = { enabled = true, executable = "pylint" },
+							pyflakes = { enabled = false },
+							pycodestyle = { enabled = false },
+							-- type checker
+							pylsp_mypy = { enabled = true },
+							-- auto-completion options
+							jedi_completion = { fuzzy = true },
+							-- import sorting
+							pyls_isort = { enabled = true },
+						},
+					},
+				},
 			})
 
 			-- 配置并启动lua语言服务器，lazydev.nvim这个插件可以更好使用lua
@@ -78,7 +107,10 @@ return {
 			'nvim-tree/nvim-web-devicons', -- optional
 		},
 		keys = {
-			{'fr', "<cmd>Lspsaga finder<CR>", desc="Find the references"}
+			{'fr', "<cmd>Lspsaga finder<CR>", desc="Find the references"},
+			{'<C-l>', "<cmd>Lspsaga term_toggle<CR>", desc="Open/close Float Terminal"},
+			{'<F3>', "<cmd>Lspsaga outline<CR>", desc="Open/close Outline"},
+			{'rr', "<cmd>Lspsaga rename<CR>", desc="Rename"},
 		},
 		config = function()
 			require('lspsaga').setup({

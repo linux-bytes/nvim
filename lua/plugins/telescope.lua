@@ -1,4 +1,6 @@
 return {
+	-- sys-apps/fd
+	-- sys-apps/ripgrep
 	'nvim-telescope/telescope.nvim',
 	dependencies = {
 		{ 'nvim-lua/plenary.nvim' },
@@ -7,9 +9,11 @@ return {
 		local builtin = require('telescope.builtin')
 
 		vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-		vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+		vim.keymap.set('n', '<C-p>',      builtin.find_files, {})
 		vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+		vim.keymap.set('n', '<C-;>',      builtin.live_grep, {})
 		vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+		vim.keymap.set('n', '<C-b>',      builtin.buffers, {})
 		vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 		vim.keymap.set('n', 'fd', builtin.lsp_definitions, {})
 	end,
