@@ -4,7 +4,7 @@
 
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "c", "h", "c++" },
+	pattern = { "c", "h", "cpp" },
 	callback = function()
 		vim.opt_local.tabstop	  = 8
 		vim.opt_local.softtabstop = 8
@@ -14,6 +14,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.autoindent  = true
 		vim.opt_local.wrap	  = false
 		vim.opt_local.spell	  = true
+
+		vim.opt_local.formatoptions="mMcroql"
 	end,
 })
 

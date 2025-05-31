@@ -35,7 +35,7 @@ return {
 				},
 			})
 
-			require("lspconfig").clangd.setup({
+			vim.lsp.config('clangd', {
 				cmd = {
 					"clangd",
 					"-j=8", -- 后台异步更新使用的worker数量
@@ -43,6 +43,7 @@ return {
 					"--background-index-priority=normal",
 					"--clang-tidy",
 					"--all-scopes-completion", -- 全局补全
+					"--rename-file-limit=0", -- 0 means no limit (default=50)
 					-- "--compile-commands-dir=" .. vim.fn.getcwd(), -- 配置compile_commands.json路径
 					-- "--query-driver=/usr/lib/llvm/17/bin/clang",
 					-- "--header-insertion=iwyu", -- 插入建议时自动引入头文件
@@ -51,7 +52,7 @@ return {
 				filetypes = { "c", "h", "cpp", "objc", "objcpp" },
 			})
 
-			require("lspconfig").pylsp.setup({
+			vim.lsp.config('pylsp', {
 				settings = {
 					pylsp = {
 						plugins = {
@@ -75,7 +76,7 @@ return {
 			})
 
 			-- 配置并启动lua语言服务器，lazydev.nvim这个插件可以更好使用lua
-			require("lspconfig").lua_ls.setup({
+			vim.lsp.config('lua_ls', {
 				settings = {
 					Lua = {
 						diagnostics = {

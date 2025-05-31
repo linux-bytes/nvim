@@ -25,6 +25,8 @@ keymap.set("v", "<leader>k", '"+x')
 keymap.set("n", "<C-s>", ':w<cr>')
 keymap.set("n", "<C-M>", 'o<Esc>k')		--- Ctrl + Enter
 
+keymap.set("n", "<F2>", ':set nohls<cr>')
+
 local function toggle_quickfix()
   local windows = vim.fn.getwininfo()
   for _, win in pairs(windows) do

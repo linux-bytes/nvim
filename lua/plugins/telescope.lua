@@ -4,19 +4,32 @@ return {
 	'nvim-telescope/telescope.nvim',
 	dependencies = {
 		{ 'nvim-lua/plenary.nvim' },
+		{
+			"nvim-telescope/telescope-live-grep-args.nvim" ,
+			-- This will not install any breaking changes.
+			-- For major updates, this must be adjusted manually.
+			version = "^1.0.0",
+		},
 	},
 	config = function()
+		local telescope = require('telescope')
+		telescope.load_extension("live_grep_args")
+
+		local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
+
 		local builtin = require('telescope.builtin')
 
 		vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 		vim.keymap.set('n', '<C-p>',      builtin.find_files, {})
 		vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 		vim.keymap.set('n', '<C-;>',      builtin.live_grep, {})
-		vim.keymap.set('n', 'ss',         builtin.grep_string, {})
+		-- vim.keymap.set('n', 'ss',         builtin.grep_string, {})
+		-- vim.keymap.set('n', 'ss',         ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {})
+		vim.keymap.set("n", "ss",	  live_grep_args_shortcuts.grep_word_under_cursor)
 		vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 		vim.keymap.set('n', '<C-b>',      builtin.buffers, {})
 		vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-		vim.keymap.set('n', 'fd', builtin.lsp_definitions, {})
+		vim.keymap.set('n', 'fd',	  builtin.lsp_definitions, {})
 	end,
 }
 

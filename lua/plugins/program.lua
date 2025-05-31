@@ -22,7 +22,17 @@ return {
 			},
 			formatters = {
 				clang_format = {
-					prepend_args = {"-style=google"},
+					-- 指定 clang-format 的路径（若不在 $PATH 中）
+					command = "clang-format",
+					args = {
+						-- 默认使用项目目录下的 .clang-format 文件
+						"--style=file",
+						-- 找不到就使用 ~/.clang-format 文件
+						"--fallback-style=~/.clang-format",
+						-- 确保根据文件类型应用规则
+						"--assume-filename", "$FILENAME",
+						"-i",  -- 直接修改原文件（若不需要可移除）
+					},
 				},
 			},
 		},
