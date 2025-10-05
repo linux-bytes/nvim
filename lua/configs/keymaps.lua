@@ -42,3 +42,8 @@ keymap.set("n", "<F4>", toggle_quickfix, {desc = "Toggle Quickfix Window"})
 
 keymap.set("v", "<S-Down>", ":m '>+1<CR>gv=gv")   --- Shift + Down:  move the text down
 keymap.set("v", "<S-Up>",   ":m '<-2<CR>gv=gv")   --- Shift + Up  :  move the text up
+
+keymap.set("n", "ff", ':bn<cr>')
+keymap.set("n", "FF", ':bN<cr>')
+keymap.set("n", "<C-Right>", ':bn<cr>')
+keymap.set("n", "<C-Left>", ':bN<cr>')

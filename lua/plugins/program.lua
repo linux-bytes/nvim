@@ -22,17 +22,29 @@ return {
 			},
 			formatters = {
 				clang_format = {
-					-- 指定 clang-format 的路径（若不在 $PATH 中）
 					command = "clang-format",
-					args = {
-						-- 默认使用项目目录下的 .clang-format 文件
-						"--style=file",
-						-- 找不到就使用 ~/.clang-format 文件
-						"--fallback-style=~/.clang-format",
-						-- 确保根据文件类型应用规则
-						"--assume-filename", "$FILENAME",
-						"-i",  -- 直接修改原文件（若不需要可移除）
-					},
+					args = function(self, ctx)
+						local args = { "-i" }
+
+						-- 检查当前目录是否有 .clang-format
+						local current_config = vim.fs.find(".clang-format", {
+							upward = true,
+							path = ctx.dirname,
+							type = "file"
+						})[1]
+
+						if current_config then
+							-- 使用当前目录的配置
+							vim.list_extend(args, { "--style=file" })
+						else
+							-- 使用家目录的配置
+							vim.list_extend(args, {"--style=file:" .. vim.fn.expand("~/.clang-format")})
+						end
+
+						-- 添加文件名参数
+						vim.list_extend(args, { "--assume-filename", ctx.filename })
+						return args
+					end,
 				},
 			},
 		},
@@ -75,6 +87,6 @@ return {
 		"danymat/neogen",
 		config = true,
 		-- Uncomment next line if you want to follow only stable versions
-		-- version = "*" 
+		-- version = "*"
 	}
 }
