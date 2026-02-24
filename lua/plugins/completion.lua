@@ -65,6 +65,7 @@ local cmp_setup = function()
 			-- customize the appearance of the completion menu
 			format = function(entry, vim_item)
 				vim_item.menu = ({
+					copilot = '[Copilot]',
 					nvim_lsp = '[Lsp]',
 					luasnip = '[Luasnip]',
 					buffer = '[File]',
@@ -76,6 +77,7 @@ local cmp_setup = function()
 
 		-- 配置数据来源
 		sources = cmp.config.sources({
+			{ name = 'copilot' }, -- For copilot
 			{ name = 'nvim_lsp' }, -- For nvim-lsp
 			{ name = 'luasnip' }, -- For luasnip user
 			{ name = 'buffer' }, -- For buffer word completion

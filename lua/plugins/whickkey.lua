@@ -1,11 +1,52 @@
 return {
-	"folke/which-key.nvim",
-	opts = {
-		spec = {
-			{ "<BS>", desc = "Decrement Selection", mode = "x" },
-			{ "<c-space>", desc = "Increment Selection", mode = { "x", "n" } },
+	{
+		"folke/which-key.nvim",
+		opts = {
+			spec = {
+				{ "<BS>",      desc = "Decrement Selection", mode = "x" },
+				{ "<c-space>", desc = "Increment Selection", mode = { "x", "n" } },
+			},
 		},
 	},
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		-- 可选：通过 `opts` 覆盖默认设置
+		opts = {
+			-- 你可以在这里添加自定义选项
+			-- 例如：modes = { char = { enabled = false } }, -- 禁用字符跳转模式
+		},
+		keys = {
+			-- 核心快捷键：使用 "s" 进入Flash跳转模式 [citation:3]
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					-- 默认行为：跳转到当前窗口内的任何匹配项
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+			-- 可选：使用 "S" 进入远程模式（可跨窗口跳转）
+			{
+				"S",
+				mode = { "n", "o", "x" },
+				function()
+					require("flash").treesitter()
+				end,
+				desc = "Flash Treesitter",
+			},
+			-- 在 visual 模式下使用 "r" 进行选择范围的快速跳转
+			{
+				"r",
+				mode = "o",
+				function()
+					require("flash").remote()
+				end,
+				desc = "Remote Flash",
+			},
+		},
+	}
 }
 
 --- return {

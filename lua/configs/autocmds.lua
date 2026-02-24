@@ -2,6 +2,9 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
+vim.o.autoindent = true
+vim.o.smartindent = true
+
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "c", "h", "cpp" },
@@ -17,6 +20,16 @@ vim.api.nvim_create_autocmd("FileType", {
 
 		vim.opt_local.formatoptions="mMcroql"
 	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "python",
+	callback = function()
+		vim.bo.expandtab = true
+		vim.bo.tabstop = 4
+		vim.bo.shiftwidth = 4
+		vim.bo.softtabstop = 4
+	end
 })
 
 vim.api.nvim_create_autocmd("FileType", {
