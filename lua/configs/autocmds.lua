@@ -74,3 +74,26 @@ vim.api.nvim_create_autocmd('FileType', {
 		})
 	end
 })
+
+local function send_osc1337(data)
+       local text = "\027]1337;SetUserVar=nvim=" .. vim.base64.encode(vim.json.encode(data)) .. "\007"
+       if vim.env.TMUX then
+               text = "\027Ptmux;\027" .. text .. "\027\\"
+       end
+       io.stdout:write(text)
+       io.stdout:flush()
+end
+
+vim.api.nvim_create_autocmd('InsertEnter', {
+       pattern = '*',
+       callback = function()
+               send_osc1337({ event = "InsertEnter" })
+       end
+})
+
+vim.api.nvim_create_autocmd('InsertLeave', {
+       pattern = '*',
+       callback = function()
+               send_osc1337({ event = "InsertLeave" })
+       end
+})

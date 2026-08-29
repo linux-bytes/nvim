@@ -23,8 +23,8 @@ return {
 					debounce = 75, -- 触发延迟（毫秒）
 					keymap = {
 						accept = "<C-y>", -- 接受当前建议
-						accept_word = "<Right>", -- 可选：接受当前单词
-						accept_line = "<Down>", -- 可选：接受当前行
+						accept_word = "<C-Right>", -- 可选：接受当前单词
+						accept_line = "<C-Down>", -- 可选：接受当前行
 						next = "<PageDown>", -- 切换到下一条建议
 						prev = "<PageUp>", -- 切换到上一条建议
 						dismiss = "<C-x>", -- 拒绝当前建议

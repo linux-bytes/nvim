@@ -8,6 +8,12 @@ return {
 		},
 		--- enabled = true,
 		config = function()
+			-- clangd 等语言服务器把正常运行信息打到 stderr，Neovim RPC 会一律按
+			-- [ERROR] 记录到 ~/.local/state/nvim/lsp.log，导致该文件无限膨胀
+			-- （曾涨到 8.9G）。这里彻底关闭 LSP 日志写入。
+			-- 排查 LSP 问题时临时打开：  :lua vim.lsp.set_log_level("DEBUG")
+			vim.lsp.set_log_level("OFF")
+
 			require('mason').setup({
 				ui = {
 					icons = {
@@ -18,7 +24,7 @@ return {
 				}
 			})
 
-			-- meson会自动下载相关的language server, 可能配置过一会儿下载完才生效
+			-- mason 会自动下载相关的language server, 可能配置过一会儿下载完才生效
 			require('mason-lspconfig').setup({
 				-- 支持的语言可以在这里找：https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 				ensure_installed = {
