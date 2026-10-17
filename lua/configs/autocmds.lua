@@ -91,9 +91,16 @@ vim.api.nvim_create_autocmd('InsertEnter', {
        end
 })
 
-vim.api.nvim_create_autocmd('InsertLeave', {
-       pattern = '*',
+-- 只要进入普通模式或命令行模式，就切回英文
+-- （覆盖 <Esc>、<C-[>、<C-c>、: / ?、visual 退出等所有路径）
+vim.api.nvim_create_autocmd('ModeChanged', {
+       pattern = { '*:n', '*:c' },
        callback = function()
-               send_osc1337({ event = "InsertLeave" })
+               send_osc1337({
+                       event = "ModeChanged",
+                       from = vim.v.event.old_mode,
+                       to = vim.v.event.new_mode,
+                       action = "SwitchIMToEN",
+               })
        end
 })
