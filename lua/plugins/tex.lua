@@ -1,6 +1,8 @@
 return {
 	{
 		"lervag/vimtex",
+		-- tag = "v2.18",
+		version = "*", -- 跟随最新的稳定 tag（如 v2.19），而不是钉死在某个版本上
 		lazy = false,
 		init = function()
 			-- 1. 查看器设置 (MuPDF)

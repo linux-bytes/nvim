@@ -20,6 +20,7 @@ return {
 	},
 	{
 		'VonHeikemen/fine-cmdline.nvim',
+		enabled = false, -- 暂时禁用，恢复时删掉本行
 		dependencies = {
 			{ 'MunifTanjim/nui.nvim' },
 		},

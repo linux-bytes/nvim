@@ -1,6 +1,7 @@
 return {
 	-- {
 	-- 	"github/copilot.vim",
+	--	enabled = false, -- 暂时禁用：账号 jerry-lixiang 无 Copilot 订阅，恢复订阅后改回 true
 	-- 	-- 可选的延迟加载配置，例如在插入模式或首次进入缓冲区时加载
 	-- 	event = "InsertEnter",
 	-- 	-- 确保 opts 存在，lazy.nvim 会自动调用 setup()
@@ -13,6 +14,7 @@ return {
 	-- },
 	{
 		"zbirenbaum/copilot.lua",
+		enabled = false, -- 暂时禁用：账号 jerry-lixiang 无 Copilot 订阅，恢复订阅后改回 true
 		event = "InsertEnter", -- 插入模式时加载
 		config = function()
 			require("copilot").setup({
@@ -57,6 +59,7 @@ return {
 	{
 		-- 2. 连接 Copilot 与 nvim-cmp 的适配器
 		"zbirenbaum/copilot-cmp",
+		enabled = false, -- 随 copilot.lua 一起禁用
 		event = "InsertEnter",
 		dependencies = { "zbirenbaum/copilot.lua" },
 		config = function()
